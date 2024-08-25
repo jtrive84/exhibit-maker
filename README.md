@@ -1,5 +1,5 @@
 
-### Grade Distribution Generator from Canvas CSV Files
+## Grade Distribution Generator from Canvas CSV Files
 
 
 This utility can be used to produce grade distribution exhibits on a module-by-module
@@ -19,7 +19,7 @@ a CSV named something along the lines of *YYYY-MM-DDTHHMM_Grades-CIS189_xxxx.csv
 Sample invocation (Windows):
 
 ```sh
-$ python exhibit_maker.py ^
+C:\> python exhibit_maker.py ^
     --csv-path="C:/Users/username/Downloads/YYY-MM-DDTHHMM_Grades-CIS189_xxxx.csv" ^
     --img_path="C:/Users/username/Downloads/module-8-grades.png" ^
     --module=8 ^
@@ -58,5 +58,5 @@ Sample output:
 
 - `--module`: The module for which to generate grade distribution exhibits. 
 
--- `--course-desc`: Coure description used in exhibit super title. Empty by default. 
+- `--course-desc`: Coure description used in exhibit super title. Empty by default. 
 
