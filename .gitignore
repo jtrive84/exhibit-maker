@@ -1,0 +1,8 @@
+.ipynb_checkpoints
+*.html
+*.tex
+.vscode
+.vscode/
+./.vscode
+__pycache__
+
