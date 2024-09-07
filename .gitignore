@@ -5,4 +5,5 @@
 .vscode/
 ./.vscode
 __pycache__
-
+assignment-exhibit-maker.ipynb
+exhibit-maker.bat
