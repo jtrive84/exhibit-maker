@@ -21,6 +21,7 @@ Author: James D. Triveri
 
 """
 import argparse
+import configparser
 from pathlib import Path
 
 import matplotlib as mpl
@@ -43,31 +44,82 @@ def main():
     parser.add_argument(
         "--img-path", type=str,
         help="Path to write grade distribution exhibit .png file",
-        default=""
+        default=None
         )
     parser.add_argument(
         "--module", type=int,
         help="Module for which to create grade distribution",
-        default=3
+        default=None
         )
     parser.add_argument(
         "--cmap", type=str,
         help="Colormap to use for grade distribution exhibits. Full list available at https://matplotlib.org/stable/users/explain/colors/colormaps.html",
-        default="winter"
+        default=None
         )
     parser.add_argument(
         "--course-desc", type=str,
-        help="Coure description used in exhibit supertitle",
+        help="Course description used in exhibit supertitle",
         default=""
         )
+    parser.add_argument(
+        "-v", "--verbose", action="store_true", 
+        help="Additional output"
+        )
     
+    # Read from settings.cfg.
+    config = configparser.ConfigParser()
+    config.read("settings.cfg")
+
+    # course_desc = config["global"].get(course_desc).strip()
+    # cfg_csv_path = config["global"].get(csv_path).strip()
+    # cfg_img_path = config["global"].get(img_path).strip()
+    # cfg_module = config["global"].getint(module)
+    # cfg_cmap = config["global"].get("cmap").strip()
+    # verbose = config["global"].getboolean("verbose")
+
+
+    # Parse command line arguments. 
     argvs = parser.parse_args()
 
-    csv_path = argvs.csv_path.strip()
-    img_path = argvs.img_path.strip()
-    module = argvs.module
-    cmap = argvs.cmap.strip()
-    course_desc = argvs.course_desc.strip()
+    # argvs_csv_path = argvs.csv_path.strip()
+    # argvs_img_path = argvs.img_path.strip()
+    # argvs_module = argvs.module
+    # argvs_cmap = argvs.cmap.strip()
+    # argvs_course_desc = argvs.course_desc.strip()
+
+
+
+    if (course_desc := argvs.course_desc) is None:
+        course_desc = config["global"].get("course_desc").strip()
+
+    if (csv_path := argvs.csv_path) is None:
+        csv_path = config["global"].get("csv_path").strip()
+    
+    if (img_path := argvs.img_path) is None:
+        img_path = config["global"].get("img_path").strip()
+
+    if (module := argvs.module) is None:
+        module = config["global"].getint("module")
+
+    if (cmap := argvs.cmap) is None:
+        cmap = config["global"].get("cmap").strip()
+
+    if (verbose := argvs.verbose) is False:
+        verbose = config["global"].getboolean("verbose")
+
+    
+    if verbose: 
+        print(f"course_desc : {course_desc}")
+        print(f"csv_path    : {csv_path}")
+        print(f"img_path    : {img_path}")
+        print(f"module      : {module}")
+        print(f"cmap        : {cmap}")
+        print(f"verbose     : {verbose}")
+        print("--------------------------------------")
+        print(f"mpl.__version__ : {mpl.__version__}")
+        print(f"np.__version__  : {np.__version__}")
+        print(f"pd.__version__  : {pd.__version__}")
+
 
     # Load grades file from Canvas. 
     dfall = pd.read_csv(csv_path)
