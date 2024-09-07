@@ -85,7 +85,7 @@ def main():
     dfpossible[["assignment", "desc"]] = dfpossible["desc"].str.split(":", expand=True)
     dfpossible["desc"]  = dfpossible["desc"].str.strip()
     dfpossible["assignment"] = dfpossible["assignment"].str.strip()
-    dfpossible[["module", "assignment"]] = dfpossible["assignment"].str.split(" ", expand=True).iloc[:, 2:]
+    dfpossible[["module", "assignment"]] = dfpossible["assignment"].str.split(" ", expand=True)
     dfpossible["module"] = dfpossible["module"].str.strip()
     dfpossible = dfpossible[dfpossible.module!="Multiple"].reset_index(drop=True)
     dfpossible["module"] = dfpossible["module"].str.replace("M", "").astype(int)
