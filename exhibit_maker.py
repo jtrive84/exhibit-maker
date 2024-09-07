@@ -70,24 +70,8 @@ def main():
     config = configparser.ConfigParser()
     config.read("settings.cfg")
 
-    # course_desc = config["global"].get(course_desc).strip()
-    # cfg_csv_path = config["global"].get(csv_path).strip()
-    # cfg_img_path = config["global"].get(img_path).strip()
-    # cfg_module = config["global"].getint(module)
-    # cfg_cmap = config["global"].get("cmap").strip()
-    # verbose = config["global"].getboolean("verbose")
-
-
     # Parse command line arguments. 
     argvs = parser.parse_args()
-
-    # argvs_csv_path = argvs.csv_path.strip()
-    # argvs_img_path = argvs.img_path.strip()
-    # argvs_module = argvs.module
-    # argvs_cmap = argvs.cmap.strip()
-    # argvs_course_desc = argvs.course_desc.strip()
-
-
 
     if (course_desc := argvs.course_desc) is None:
         course_desc = config["global"].get("course_desc").strip()
